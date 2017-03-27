@@ -4,9 +4,12 @@
         <meta charset="utf-8">
         <title>Simple Dropbox</title>
 
-        <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/public/style.css" />
     </head>
     <body id="page-top" ng-app="simpledropbox">
+
+        <div class="main-view" ui-view></div>
 
         <!-- JS Libs -->
         <script src="/jquery/dist/jquery.min.js"></script>
@@ -15,13 +18,21 @@
 
         <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 
+        <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+
         <script src="/angular-file-upload/dist/angular-file-upload.min.js"></script>
+
+        <script src="/angular-validation-match/src/angular-validation-match.js"></script>
 
 
         <!--JS Modules-->
         <script src="/app.js"></script>
-
-        <div ng-include="'/upload.html'" ></div>
-       
+        <script src="/modules/login/login.controller.js"></script>
+        <script src="/modules/login/login.service.js"></script>
+        <script src="/modules/user/user.controller.js"></script>
+        <script src="/modules/user/user.service.js"></script>
+        <script src="/modules/upload/app.controller.js"></script>
+        <script src="/modules/upload/app.service.js"></script>
+        
     </body>
 </html>
