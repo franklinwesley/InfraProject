@@ -7,15 +7,28 @@
 
 	function service($http) {
 		
-		const URI = '/upload';
+		const URI = '/upload/';
 
 		/**
         * Functions declarations on the top for better reading and understanding
         * */
         return {
         	upload: upload,
-            remove: remove
+            remove: remove,
+            getFiles: getFiles
         };
+
+        function getFiles(user, callback) {
+            return $http({
+                method: 'GET',
+                url: URI + user,
+                headers: {'Content-Type': 'application/json;charset=utf-8'}
+            }).then(function(response){
+                callback(null, response.data);
+            }, function(error){
+                callback(error.data);
+            });
+        }
 
         function upload(data, callback) {
         	return $http({
