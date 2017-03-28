@@ -40,7 +40,13 @@ app.set('port', process.env.PORT || 3000);
 
 app.post('/upload', upload.single('file'), function(req,res,next){
 	console.log('Uploade Successful ', req.file, req.body);
+	// res.json({'ok':'ok'});
 });
+
+// app.delete('/upload', function(req,res,next){
+// 	console.log('Remove Successful ', req.body);
+// 	res.json({'ok':'ok'});
+// });
 
 app.post('/signin', function(req,res,next){
 	var user = {

@@ -13,7 +13,8 @@
         * Functions declarations on the top for better reading and understanding
         * */
         return {
-        	upload: upload
+        	upload: upload,
+            remove: remove
         };
 
         function upload(data, callback) {
@@ -28,6 +29,20 @@
         	}, function(error){
         		callback(error.data);
         	});
+        }
+
+        function remove(data, callback) {
+            console.log(data);
+            return $http({
+                method: 'DELETE',
+                url: URI,
+                data: data,
+                headers: {'Content-Type': 'application/json;charset=utf-8'}
+            }).then(function(response){
+                callback(null, response.data);
+            }, function(error){
+                callback(error.data);
+            });
         }
     }
 })();
