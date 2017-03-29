@@ -36,11 +36,14 @@ var upload = multer({ storage: storage });
 
 var openstack = pkgcloud.storage.createClient({
     provider: 'openstack', // required
-    username: 'demo', // required
-    password: 'DEMO_PASS', // required
-    authUrl: '150.165.85.15:35357' // required
+    username: 'admin', // required
+    password: 'ADMIN_PASS', // required
+    authUrl: '173.10.10.51:5000', // required
+    region: 'RegionOne',
+    tenantId: 'd07349d8407b44bfae558e8e2192b744',
+    version: 'v3',
+    keystoneAuthVersion: 'v3'
 });
-
 
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
@@ -48,7 +51,8 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 app.set('port', process.env.PORT || 3000);
 
 app.get('/test', function (req,res,next) {
-    openstack.getContainer('CONTAINER3',function(err, containers) {
+    console.log(openstack);
+    openstack.getContainers(function(err, containers) {
         console.log('c', containers);
         res.json(containers);
     });
