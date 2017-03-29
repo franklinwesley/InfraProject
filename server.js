@@ -6,6 +6,7 @@ var http = require('http');
 var multer  = require('multer');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
+var pkgcloud = require('pkgcloud');
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,10 +34,25 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
+var openstack = pkgcloud.storage.createClient({
+    provider: 'openstack', // required
+    username: 'demo', // required
+    password: 'DEMO_PASS', // required
+    authUrl: '150.165.85.15:35357' // required
+});
+
+
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.set('port', process.env.PORT || 3000);
+
+app.get('/test', function (req,res,next) {
+    openstack.getContainer('CONTAINER3',function(err, containers) {
+        console.log('c', containers);
+        res.json(containers);
+    });
+});
 
 app.get('/upload/:user', function(req,res,next){
     console.log('Get files', req.params.user);
