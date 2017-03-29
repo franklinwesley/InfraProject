@@ -49,12 +49,7 @@ var openstack = pkgcloud.storage.createClient({
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
-<<<<<<< HEAD
 app.set('port', process.env.PORT || 3333);
-=======
-// app.set('port', process.env.PORT || 3000);
-app.set('port', 80);
->>>>>>> b91003f356a546d669e278ff599980171455e569
 
 app.get('/test', function (req,res,next) {
     console.log('oi');
