@@ -52,8 +52,8 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 app.set('port', process.env.PORT || 3333);
 
 app.get('/upload/:user', function(req,res,next){
-    openstack.getContainer('app', function(err, container) {
-        res.json(container);
+    openstack.getFiles('app', function(err, files) {
+        res.json(files);
     })
 });
 
