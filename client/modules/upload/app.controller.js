@@ -37,7 +37,7 @@
 
         $scope.getFile = function (file) {
             console.log('controller-file',file);
-            var fileName = file._file ? file._file.name : file.name;
+            var fileName = file._file ? file._file.name : file.file.name;
             console.log('controller-name',fileName);
             AppService.getFile($rootScope.user, fileName, function (error, data) {
                 if(error) {
@@ -65,7 +65,7 @@
 
 		$scope.remove = function (file) {
 			if (file.isSuccess) {
-			    var fileName = { fileName: file._file ? file._file.name : file.name};
+			    var fileName = { fileName: file._file ? file._file.name : file.file.name};
                 AppService.remove($rootScope.user, fileName, function (error, data) {
                     if(error) {
                         $scope.fileError = error.code;
