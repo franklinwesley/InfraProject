@@ -35,6 +35,16 @@
             });
         };
 
+        $scope.getFile = function (file) {
+            var fileName = file._file ? file._file.name : file.name;
+            AppService.getFile($rootScope.user, fileName, function (error, data) {
+                if(error) {
+                    $scope.fileError = error.code;
+                    return;
+                }
+            });
+        };
+
 		$scope.upload = function (file) {
 			var data = new FormData();
 			data.append('file', file._file);
@@ -53,7 +63,8 @@
 
 		$scope.remove = function (file) {
 			if (file.isSuccess) {
-                AppService.remove($rootScope.user, {fileName: file._file.name}, function (error, data) {
+			    var fileName = { fileName: file._file ? file._file.name : file.name};
+                AppService.remove($rootScope.user, fileName, function (error, data) {
                     if(error) {
                         $scope.fileError = error.code;
                         return;

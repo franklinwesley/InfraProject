@@ -15,7 +15,8 @@
         return {
         	upload: upload,
             remove: remove,
-            getFiles: getFiles
+            getFiles: getFiles,
+            getFile: getFile
         };
 
         function getFiles(user, callback) {
@@ -24,6 +25,19 @@
                 url: URI + user,
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             }).then(function(response){
+                callback(null, response.data);
+            }, function(error){
+                callback(error.data);
+            });
+        }
+
+        function getFile(user, file, callback) {
+            return $http({
+                method: 'GET',
+                url: URI + user + '/' + file,
+                headers: {'Content-Type': 'application/json;charset=utf-8'}
+            }).then(function(response){
+                console.log(response);
                 callback(null, response.data);
             }, function(error){
                 callback(error.data);
