@@ -58,11 +58,19 @@ app.get('/upload/:user', function(req,res,next){
     })
 });
 
+app.get('/upload/:user/:file', function(req,res,next){
+    openstack.download({
+        container: 'app',
+        remote: req.params.file
+    }, function(err, result) {
+        res.send(result);
+    });
+});
+
 app.post('/upload/:user', upload.single('file'), function(req,res,next){
     var options = {
         container: 'app',
         remote: req.file.originalname,
-        // contentType: 'application/json', // optional mime type for the file, will attempt to auto-detect based on remote name
         size: req.file.size
     };
 
@@ -80,7 +88,7 @@ app.post('/upload/:user', upload.single('file'), function(req,res,next){
     readStream.pipe(writeStream);    
 });
 
-app.delete('/upload/:user/', function(req,res,next){
+app.delete('/upload/:user', function(req,res,next){
     openstack.removeFile('app', req.body.fileName, function(err, result) {
         res.json(result);
     })
