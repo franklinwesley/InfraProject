@@ -39,13 +39,9 @@
                                 <button type="button" class="btn btn-success btn-xs" ng-click="upload(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                                     <span class="glyphicon glyphicon-upload"></span> Upload
                                 </button>
-                                <a class="btn btn-default btn-xs" ng-disabled="item.isReady || item.isUploading || item.isSuccess"
-                                   ng-href="{{'downloads/' + file._file ? file._file.name : file.file.name}}" target="test">
+                                <button type="button" class="btn btn-default btn-xs" ng-click="getFile(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                                     <span class="glyphicon glyphicon-download"></span> Download
-                                </a>
-                                <!--<button type="button" class="btn btn-default btn-xs" ng-click="getFile(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">-->
-                                    <!--<span class="glyphicon glyphicon-download"></span> Download-->
-                                <!--</button>-->
+                                </button>
                                 <button type="button" class="btn btn-danger btn-xs" ng-click="remove(item)">
                                     <span class="glyphicon glyphicon-trash"></span> Remove
                                 </button>

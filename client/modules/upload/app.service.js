@@ -37,12 +37,14 @@
                 url: URI + user + '/' + file,
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             }).then(function(response){
-                // var element = angular.element('<a/>');
-                // element.attr({
-                //     href: 'data:attachment/' + file.split('.')[1] + ';charset=utf-8,' + encodeURI(response.data),
-                //     target: 'test',
-                //     download: file
-                // })[0].click();
+                var blob = new Blob([response.data], { type: 'text/plain' });
+                var url = $window.URL || $window.webkitURL;
+                var fileUrl = url.createObjectURL(blob);
+                var element = angular.element('<a/>');
+                element.attr({
+                    href: fileUrl,
+                    download: file
+                })[0].click();
                 callback(null, response.data);
             }, function(error){
                 callback(error.data);
