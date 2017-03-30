@@ -36,10 +36,12 @@
                                 <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
                             </td>
                             <td nowrap>
-                                <button type="button" class="btn btn-success btn-xs" ng-click="upload(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal"
+                                        ng-click="upload(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                                     <span class="glyphicon glyphicon-upload"></span> Upload
                                 </button>
-                                <a href="" class="btn btn-default btn-xs" ng-click="getFile(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                <a href="" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal"
+                                   ng-click="getFile(item)" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                                     <span class="glyphicon glyphicon-download"></span> Download
                                 </a>
                                 <button type="button" class="btn btn-danger btn-xs" ng-click="remove(item)">
@@ -51,6 +53,25 @@
                 </table>
 
                 <h3 ng-show="uploader.queue.length === 0 && files.length === 0"><center>File queue is empty</center></h3>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="spinner">
+                                    <div class="rect1"></div>
+                                    <div class="rect2"></div>
+                                    <div class="rect3"></div>
+                                    <div class="rect4"></div>
+                                    <div class="rect5"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

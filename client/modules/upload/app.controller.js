@@ -38,12 +38,13 @@
         };
 
         $scope.getFile = function (file) {
-        	var start = moment();
+            var start = moment();
             var fileName = file._file ? file._file.name : file.file.name;
             AppService.getFile($rootScope.user, fileName, function (error, data) {
                 if(error) {
                     $scope.fileError = error.code;
                 }
+                $('#modal').modal('toggle');
                 console.log('timer', moment().diff(start));
                 var fileBlob = new Blob([data], { type: 'text/plain;charset=utf-8' });
                 FileSaver.saveAs(fileBlob, fileName);
@@ -64,6 +65,7 @@
 
 				file.isSuccess = true;
 				file.isError = false;
+                $('#modal').modal('toggle');
                 console.log('timer', moment().diff(start));
 			});
 		};
