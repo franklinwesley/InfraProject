@@ -66,7 +66,17 @@ app.get('/upload/:user/:file', function(req,res,next){
         container: 'app',
         remote: fileName
     }, function(err, result) {
-        res.download(filePath);
+        if (err) {
+            return res.status(400).json(err);
+        }
+
+        res.download(filePath, 'report.pdf', function(err) {
+            if (err) {
+                res.status(400).json(err);
+            } else {
+                console.log('pegou');
+            }
+        });
     }).pipe(file);
 });
 

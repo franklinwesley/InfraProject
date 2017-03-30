@@ -37,9 +37,10 @@
                 url: URI + user + '/' + file,
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             }).then(function(response){
-                console.log(response);
+                console.log('res',response);
                 callback(null, response.data);
             }, function(error){
+                console.log('err',error);
                 callback(error.data);
             });
         }
