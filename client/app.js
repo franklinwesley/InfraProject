@@ -3,7 +3,8 @@
         .module('simpledropbox', [
             'ui.router',
             'validation.match',
-            'angularFileUpload'
+            'angularFileUpload',
+            'ngFileSaver'
         ])
         .config(configuration);
 
