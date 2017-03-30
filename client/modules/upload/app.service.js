@@ -38,10 +38,14 @@
                 url: URI + user + '/' + file,
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             }).then(function(response){
-                console.log('res',response);
+                var element = angular.element('<a/>');
+                element.attr({
+                    href: 'data:' + encodeURI(data),
+                    target: '_blank',
+                    download: file
+                })[0].click();
                 callback(null, response.data);
             }, function(error){
-                console.log('err',error);
                 callback(error.data);
             });
         }
