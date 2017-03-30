@@ -29,8 +29,10 @@
                     return;
                 }
 
-                data.forEach(function (file) {
-                    $scope.files.push({file: file});
+                data.forEach(function (element) {
+                    var file = {file: element};
+                    file.isSuccess = true;
+                    $scope.files.push(file);
                 });
             });
         };
