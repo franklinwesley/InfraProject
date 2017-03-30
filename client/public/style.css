@@ -270,7 +270,7 @@ footer img:focus , footer a:focus { outline: none; }
 }
 
 .spinner > div {
-	background-color: #333;
+	background-color: #337ab7;
 	height: 100%;
 	width: 6px;
 	display: inline-block;
