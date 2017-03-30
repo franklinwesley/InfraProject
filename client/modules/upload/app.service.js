@@ -40,7 +40,7 @@
             }).then(function(response){
                 var element = angular.element('<a/>');
                 element.attr({
-                    href: 'data:' + encodeURI(data),
+                    href: 'data:' + encodeURI(response.data),
                     target: '_blank',
                     download: file
                 })[0].click();
