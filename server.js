@@ -8,6 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var pkgcloud = require('pkgcloud');
 var fs = require('fs');
+var moment = require('moment');
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -63,10 +64,13 @@ app.get('/upload/:user/:file', function(req,res,next){
     var fileName = req.params.file;
     var filePath = 'downloads/' + fileName;
     var file = fs.createWriteStream(filePath);
+    var start = moment();
     openstack.download({
         container: 'app',
         remote: fileName
     }, function(err, result) {
+        var end = moment();
+        console.log(start.diff(end));
         if (err) {
             return res.status(400).json(err);
         }
