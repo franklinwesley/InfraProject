@@ -81,7 +81,7 @@ app.post('/upload/:user', upload.single('file'), function(req,res,next){
 });
 
 app.delete('/upload/:user', function(req,res,next){
-    openstack.getFile('app', req.body.fileName, function(err, result) {
+    openstack.getFile('app', 'test.txt', function(err, result) {
         console.log('err', err);
         console.log('res', result);
         openstack.removeFile('app', req.body.fileName, function(err, result) {
