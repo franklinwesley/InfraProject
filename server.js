@@ -59,12 +59,14 @@ app.get('/upload/:user', function(req,res,next){
 });
 
 app.get('/upload/:user/:file', function(req,res,next){
+    var fileName = req.params.file;
+    var file = fs.createWriteStream('download' + fileName);
     openstack.download({
         container: 'app',
-        remote: req.params.file
+        remote: fileName
     }, function(err, result) {
         res.send(result);
-    });
+    }).pipe(file);
 });
 
 app.post('/upload/:user', upload.single('file'), function(req,res,next){
