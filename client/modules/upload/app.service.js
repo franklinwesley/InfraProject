@@ -32,6 +32,7 @@
         }
 
         function getFile(user, file, callback) {
+            console.log('service',file);
             return $http({
                 method: 'GET',
                 url: URI + user + '/' + file,
