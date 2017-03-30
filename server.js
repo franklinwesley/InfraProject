@@ -7,6 +7,7 @@ var multer  = require('multer');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var pkgcloud = require('pkgcloud');
+var fs = require('fs');
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -58,8 +59,25 @@ app.get('/upload/:user', function(req,res,next){
 });
 
 app.post('/upload', upload.single('file'), function(req,res,next){
-    console.log('Uploade Successful ', req.file, req.body);
-    res.json({'ok':'ok'});
+    var options = {
+        container: 'app',
+        remote: req.file.originalname,
+        // contentType: 'application/json', // optional mime type for the file, will attempt to auto-detect based on remote name
+        size: req.file.size
+    };
+
+    var readStream = fs.createReadStream(req.file.path);
+    var writeStream = client.upload(options);
+
+    writeStream.on('error', function(err) {
+        res.status(400).json({'err':'err'});
+    });
+
+    writeStream.on('success', function(file) {
+        res.json({'ok':'ok'});
+    });
+
+    readStream.pipe(writeStream);    
 });
 
 app.delete('/upload/:user', function(req,res,next){
