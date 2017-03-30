@@ -71,7 +71,7 @@
                         return;
                     }
 
-                    if (uploader.queue.indexOf(file) >= 0) {
+                    if ($scope.uploader.queue.indexOf(file) >= 0) {
                         file.remove();
                     } else {
                         $scope.files.splice($scope.files.indexOf(file), 1);
