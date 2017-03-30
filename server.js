@@ -81,14 +81,11 @@ app.post('/upload/:user', upload.single('file'), function(req,res,next){
 });
 
 app.delete('/upload/:user', function(req,res,next){
-    openstack.getFile('app', 'test.txt', function(err, result) {
-        console.log('err', err);
-        console.log('res', result);
-        openstack.removeFile('app', req.body.fileName, function(err, result) {
-            console.log('err2', err);
-            console.log('res2', result);
-            res.json(result);
-        })
+    var fileName = req.body.fileName;
+    openstack.removeFile('app', fileName, function(err, result) {
+        console.log('err2', err);
+        console.log('res2', result);
+        res.json(result);
     })
 });
 
