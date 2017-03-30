@@ -44,9 +44,8 @@
                 if(error) {
                     $scope.fileError = error.code;
                 }
-
-                var fileBlob = new Blob([data], { type: 'text/plain;charset=utf-8' });
                 console.log('timer', moment().diff(start));
+                var fileBlob = new Blob([data], { type: 'text/plain;charset=utf-8' });
                 FileSaver.saveAs(fileBlob, fileName);
             });
         };
