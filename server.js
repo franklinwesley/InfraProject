@@ -58,7 +58,7 @@ app.get('/upload/:user', function(req,res,next){
     })
 });
 
-app.post('/upload', upload.single('file'), function(req,res,next){
+app.post('/upload/:user', upload.single('file'), function(req,res,next){
     var options = {
         container: 'app',
         remote: req.file.originalname,
@@ -67,14 +67,14 @@ app.post('/upload', upload.single('file'), function(req,res,next){
     };
 
     var readStream = fs.createReadStream(req.file.path);
-    var writeStream = client.upload(options);
+    var writeStream = openstack.upload(options);
 
     writeStream.on('error', function(err) {
-        res.status(400).json({'err':'err'});
+        res.status(400).json({'err': err});
     });
 
     writeStream.on('success', function(file) {
-        res.json({'ok':'ok'});
+        res.json({'file': file});
     });
 
     readStream.pipe(writeStream);    
