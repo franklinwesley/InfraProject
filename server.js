@@ -70,7 +70,7 @@ app.get('/upload/:user/:file', function(req,res,next){
         remote: fileName
     }, function(err, result) {
         var end = moment();
-        console.log(start.diff(end));
+        console.log(end.diff(start));
         if (err) {
             return res.status(400).json(err);
         }
@@ -96,7 +96,7 @@ app.post('/upload/:user', upload.single('file'), function(req,res,next){
 
     writeStream.on('success', function(file) {
         var end = moment();
-        console.log(start.diff(end));
+        console.log(end.diff(start));
         res.json({'file': file});
     });
 
