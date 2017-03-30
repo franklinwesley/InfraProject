@@ -60,7 +60,6 @@
         }
 
         function remove(user, data, callback) {
-            console.log(data);
             return $http({
                 method: 'DELETE',
                 url: URI + user,

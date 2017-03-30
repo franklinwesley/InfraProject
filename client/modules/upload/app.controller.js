@@ -71,10 +71,10 @@
                         return;
                     }
 
-                    if ($scope.files.indexOf(file)) {
-                        $scope.files.splice($scope.files.indexOf(file), 1);
-                    } else {
+                    if (uploader.queue.indexOf(file) >= 0) {
                         file.remove();
+                    } else {
+                        $scope.files.splice($scope.files.indexOf(file), 1);
                     }
                 });
 			} else {
