@@ -80,9 +80,15 @@ app.post('/upload/:user', upload.single('file'), function(req,res,next){
     readStream.pipe(writeStream);    
 });
 
-app.delete('/upload/:user', function(req,res,next){
+app.delete('/upload/:user/:file', function(req,res,next){
     var fileName = req.body.fileName;
     console.log(fileName);
+    console.log(req.params.file);
+    openstack.getFile('app', req.params.file, function(err, result) {
+        console.log('err2', err);
+        console.log('res2', result);
+        // res.json(result);
+    })
     openstack.removeFile('app', fileName, function(err, result) {
         console.log('err2', err);
         console.log('res2', result);
