@@ -40,7 +40,6 @@
             AppService.getFile($rootScope.user, fileName, function (error, data) {
                 if(error) {
                     $scope.fileError = error.code;
-                    return;
                 }
             });
         };

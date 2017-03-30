@@ -32,7 +32,6 @@
         }
 
         function getFile(user, file, callback) {
-            console.log('service',file);
             return $http({
                 method: 'GET',
                 url: URI + user + '/' + file,
@@ -40,8 +39,8 @@
             }).then(function(response){
                 var element = angular.element('<a/>');
                 element.attr({
-                    href: 'data:' + encodeURI(response.data),
-                    target: '_blank',
+                    href: 'data:attachment/' + file.split('.')[1] + ';charset=utf-8,' + encodeURI(response.data),
+                    target: 'test',
                     download: file
                 })[0].click();
                 callback(null, response.data);
