@@ -60,7 +60,8 @@ app.get('/upload/:user', function(req,res,next){
 
 app.get('/upload/:user/:file', function(req,res,next){
     var fileName = req.params.file;
-    var file = fs.createWriteStream('download' + fileName);
+    console.log(fileName);
+    var file = fs.createWriteStream('downloads/' + fileName);
     openstack.download({
         container: 'app',
         remote: fileName
