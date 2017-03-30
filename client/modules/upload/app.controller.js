@@ -46,8 +46,8 @@
                 }
 
                 var fileBlob = new Blob([data], { type: 'text/plain;charset=utf-8' });
-                FileSaver.saveAs(fileBlob, fileName);
                 console.log('timer', moment().diff(start));
+                FileSaver.saveAs(fileBlob, fileName);
             });
         };
 
