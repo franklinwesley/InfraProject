@@ -36,9 +36,7 @@
         };
 
         $scope.getFile = function (file) {
-            console.log('controller-file',file);
             var fileName = file._file ? file._file.name : file.file.name;
-            console.log('controller-name',fileName);
             AppService.getFile($rootScope.user, fileName, function (error, data) {
                 if(error) {
                     $scope.fileError = error.code;

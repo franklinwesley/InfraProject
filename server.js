@@ -60,7 +60,6 @@ app.get('/upload/:user', function(req,res,next){
 
 app.get('/upload/:user/:file', function(req,res,next){
     var fileName = req.params.file;
-    console.log(fileName);
     var filePath = 'downloads/' + fileName;
     var file = fs.createWriteStream(filePath);
     openstack.download({
@@ -68,18 +67,10 @@ app.get('/upload/:user/:file', function(req,res,next){
         remote: fileName
     }, function(err, result) {
         if (err) {
-            console.log('err',err);
             return res.status(400).json(err);
         }
 
-        res.download(filePath, 'report.pdf', function(err) {
-            if (err) {
-                console.log('errD',err);
-                res.status(400).json(err);
-            } else {
-                console.log('pegou');
-            }
-        });
+        res.download(filePath);
     }).pipe(file);
 });
 
