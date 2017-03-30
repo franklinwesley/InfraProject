@@ -51,19 +51,10 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.set('port', process.env.PORT || 3333);
 
-app.get('/test', function (req,res,next) {
-    console.log('oi');
-    // console.log(openstack);
-    openstack.getContainers(function(err, containers) {
-        console.log('err', err);
-        console.log('c', containers);
-        res.json(containers);
-    });
-});
-
 app.get('/upload/:user', function(req,res,next){
-    console.log('Get files', req.params.user);
-    res.json({'ok':'ok'});
+    openstack.getContainer('app', function(err, container) {
+        res.json(container);
+    })
 });
 
 app.post('/upload', upload.single('file'), function(req,res,next){
