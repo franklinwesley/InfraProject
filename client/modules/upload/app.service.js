@@ -3,9 +3,9 @@
 		.module('simpledropbox')
 		.factory('AppService', service);
 
-	service.$inject = ['$http'];
+	service.$inject = ['$http', '$window'];
 
-	function service($http) {
+	function service($http, $window) {
 		
 		const URI = '/upload/';
 
