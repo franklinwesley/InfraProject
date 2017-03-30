@@ -62,9 +62,10 @@ app.post('/upload', upload.single('file'), function(req,res,next){
     res.json({'ok':'ok'});
 });
 
-app.delete('/upload', function(req,res,next){
-    console.log('Remove Successful ', req.body);
-    res.json({'ok':'ok'});
+app.delete('/upload/:user', function(req,res,next){
+    openstack.removeFile('app', req.body.fileName, function(err, result) {
+        res.json(result);
+    })
 });
 
 app.post('/signin', function(req,res,next){

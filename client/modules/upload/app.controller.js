@@ -29,7 +29,9 @@
                     return;
                 }
 
-                $scope.files.concat(data);
+                data.forEach(function (file) {
+                    $scope.files.push({file: file});
+                });
             });
         };
 
