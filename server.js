@@ -38,11 +38,11 @@ var openstack = pkgcloud.storage.createClient({
     provider: 'openstack', // required
     username: 'admin', // required
     password: 'ADMIN_PASS', // required
-    authUrl: '173.10.10.51:5000', // required
+    authUrl: '150.165.85.15:5000', // required
     domainId: 'default',
     region: 'RegionOne',
     tenantId: 'd07349d8407b44bfae558e8e2192b744',
-    version: 'v3',
+    version: 'v1',
     keystoneAuthVersion: 'v3'
 });
 
@@ -53,6 +53,7 @@ app.set('port', process.env.PORT || 3333);
 
 app.get('/test', function (req,res,next) {
     console.log('oi');
+    // console.log(openstack);
     openstack.getContainers(function(err, containers) {
         console.log('err', err);
         console.log('c', containers);
