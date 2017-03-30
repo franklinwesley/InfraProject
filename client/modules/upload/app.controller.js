@@ -46,8 +46,8 @@
                 }
 
                 var fileBlob = new Blob([data], { type: 'text/plain;charset=utf-8' });
-                FileSaver.saveAs(fileBlob, file);
-                moment().diff(start);
+                FileSaver.saveAs(fileBlob, fileName);
+                console.log('timer', moment().diff(start));
             });
         };
 
@@ -65,7 +65,7 @@
 
 				file.isSuccess = true;
 				file.isError = false;
-                moment().diff(start);
+                console.log('timer', moment().diff(start));
 			});
 		};
 
