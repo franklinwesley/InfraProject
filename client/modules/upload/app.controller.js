@@ -3,9 +3,9 @@
 	.module('simpledropbox')
 	.controller('AppController', controller);
 
-	controller.$inject = ['$rootScope', '$scope', '$timeout', 'FileUploader', 'AppService'];
+	controller.$inject = ['$rootScope', '$scope', '$timeout', 'FileUploader', 'AppService', 'FileSaver'];
 
-	function controller ($rootScope, $scope, $timeout, FileUploader, AppService) {
+	function controller ($rootScope, $scope, $timeout, FileUploader, AppService, FileSaver) {
 
 		$scope.uploader = new FileUploader();
 		$scope.files = [];
@@ -38,15 +38,21 @@
         };
 
         $scope.getFile = function (file) {
+        	var start = moment();
             var fileName = file._file ? file._file.name : file.file.name;
             AppService.getFile($rootScope.user, fileName, function (error, data) {
                 if(error) {
                     $scope.fileError = error.code;
                 }
+
+                var fileBlob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+                FileSaver.saveAs(fileBlob, file);
+                moment().diff(start);
             });
         };
 
 		$scope.upload = function (file) {
+            var start = moment();
 			var data = new FormData();
 			data.append('file', file._file);
 			AppService.upload($rootScope.user, data, function (error, data) {
@@ -59,6 +65,7 @@
 
 				file.isSuccess = true;
 				file.isError = false;
+                moment().diff(start);
 			});
 		};
 

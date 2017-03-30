@@ -3,9 +3,9 @@
 		.module('simpledropbox')
 		.factory('AppService', service);
 
-	service.$inject = ['$http', 'FileSaver'];
+	service.$inject = ['$http'];
 
-	function service($http, FileSaver) {
+	function service($http) {
 		
 		const URI = '/upload/';
 
@@ -37,8 +37,6 @@
                 url: URI + user + '/' + file,
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             }).then(function(response){
-                var data = new Blob([response.data], { type: 'text/plain;charset=utf-8' });
-                FileSaver.saveAs(data, file);
                 callback(null, response.data);
             }, function(error){
                 callback(error.data);
