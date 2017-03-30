@@ -87,6 +87,7 @@ app.post('/upload/:user', upload.single('file'), function(req,res,next){
     };
 
     var readStream = fs.createReadStream(req.file.path);
+    var start = moment();
     var writeStream = openstack.upload(options);
 
     writeStream.on('error', function(err) {
@@ -94,6 +95,8 @@ app.post('/upload/:user', upload.single('file'), function(req,res,next){
     });
 
     writeStream.on('success', function(file) {
+        var end = moment();
+        console.log(start.diff(end));
         res.json({'file': file});
     });
 
