@@ -30,10 +30,10 @@
             });
         }
 
-        function upload(data, callback) {
+        function upload(user, data, callback) {
         	return $http({
         		method: 'POST',
-        		url: URI,
+        		url: URI + user,
         		data: data,
         		transformRequest: angular.identity,
         		headers: {'Content-Type': undefined}
@@ -44,11 +44,11 @@
         	});
         }
 
-        function remove(data, callback) {
+        function remove(user, data, callback) {
             console.log(data);
             return $http({
                 method: 'DELETE',
-                url: URI,
+                url: URI + user,
                 data: data,
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             }).then(function(response){

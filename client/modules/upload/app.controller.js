@@ -38,7 +38,7 @@
 		$scope.upload = function (file) {
 			var data = new FormData();
 			data.append('file', file._file);
-			AppService.upload(data, function (error, data) {
+			AppService.upload($rootScope.user, data, function (error, data) {
 				if(error) {
 					$scope.fileError = error.code;
 					file.isSuccess = false;
@@ -53,7 +53,7 @@
 
 		$scope.remove = function (file) {
 			if (file.isSuccess) {
-                AppService.remove({fileName: file._file.name}, function (error, data) {
+                AppService.remove($rootScope.user, {fileName: file._file.name}, function (error, data) {
                     if(error) {
                         $scope.fileError = error.code;
                         return;
@@ -69,34 +69,5 @@
 				file.remove();
 			}
 		};
-
-        $scope.uploadAll = function () {
-            var data = new FormData();
-            for (var i = 0; i < $scope.uploader.queue.length; i++) {
-                data.append('file', $scope.uploader.queue[i]._file);
-            }
-
-            AppService.upload(data, function (error, data) {
-                if(error) {
-                    $scope.fileError = error.code;
-                    return;
-                }
-
-                uploader.clearQueue();
-                $scope.files = data;
-            });
-        };
-
-		$scope.removeAll = function () {
-            AppService.remove({}, function (error, data) {
-                if(error) {
-                    $scope.fileError = error.code;
-                    return;
-                }
-
-                uploader.clearQueue();
-                $scope.files = [];
-            });
-        };
 	}
 })();
